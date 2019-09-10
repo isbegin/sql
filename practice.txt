@@ -10,3 +10,28 @@ select * from customers
 limit [offset],[number of records]
 --ex: limit 5,2 this will skip 5 records 
 and display next 2 records 
+
+Excersise -- Get the top 3 loyal customers
+select * 
+from customers
+order by points desc
+limit 3
+
+Inner Join
+select order_id, first_name, last_name
+
+from orders
+join customers
+
+on orders.customer_id = customers.customer_id
+-- this will join order and customers table using 
+-- customer_id, Note: Join means inner join
+
+using alias name in table
+select order_id, o.customer_id,c.customer_id
+
+from orders o
+
+join customers c
+
+on o.customer_id = c.customer_id
