@@ -65,3 +65,24 @@ join customers c
   on
  o.status = os.order_status_id
 
+compound join
+using multiple condition to joining tables
+select *
+from order_item oi
+join order_iten_notes oin
+ on oi.order_id = oin.order_id
+ and oi.product_id = oin.product.id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
