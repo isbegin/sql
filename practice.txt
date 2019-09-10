@@ -27,7 +27,7 @@ on orders.customer_id = customers.customer_id
 -- this will join order and customers table using 
 -- customer_id, Note: Join means inner join
 
-using alias name in table
+--using alias name in table
 select order_id, o.customer_id,c.customer_id
 
 from orders o
@@ -37,3 +37,18 @@ join customers c
 on o.customer_id = c.customer_id
 -- for joining table from different database 
 -- use databasename.tablename 
+
+-self join
+use sql_hr;
+
+select e.employee_id,e.first_name,m.first_name as manager
+
+from employees e
+ 
+join employees m
+
+ on e.reports_to = m.employee_id
+
+
+
+
