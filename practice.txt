@@ -73,6 +73,25 @@ join order_iten_notes oin
  on oi.order_id = oin.order_id
  and oi.product_id = oin.product.id
 
+Implicit join
+select *
+from orders o, customers c
+where o.customer_id = c.customer_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
