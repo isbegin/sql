@@ -3,3 +3,10 @@ select *,quantity * unit_price as total_price
 from order_items 
 where order_id = 2 
 order by quantity * unit_price 
+
+Limits
+select * from customers
+
+limit [offset],[number of records]
+--ex: limit 5,2 this will skip 5 records 
+and display next 2 records 
