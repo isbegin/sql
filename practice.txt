@@ -143,6 +143,21 @@ Select * From orders
 where order_date < '2019-01-01'
 
 
+*Updating a row  (Update and Set)
+Update invoices
+set payment_total = 10, payment_date ='1990-1-1'
+where invoice_id = 1
+
+OR
+
+Update invoices 
+set payment_total = invoice_total, payment_date =due_date
+where invoice_id = 3
+
+update multiple row (will update points of all customers who are born before 1990)
+update customers
+set points = points + 50
+where birth_date <= ‘1990-1-1’
 
 
 
