@@ -1,3 +1,4 @@
+@ -1,160 +0,0 @@
 use sql_store;
 select *,quantity * unit_price as total_price
 from order_items 
@@ -6,7 +7,6 @@ order by quantity * unit_price
 
 Limits
 select * from customers
-
 limit [offset],[number of records]
 --ex: limit 5,2 this will skip 5 records 
 and display next 2 records 
@@ -19,51 +19,35 @@ limit 3
 
 Inner Join
 select order_id, first_name, last_name
-
 from orders
 join customers
-
 on orders.customer_id = customers.customer_id
 -- this will join order and customers table using 
 -- customer_id, Note: Join means inner join
 
 --using alias name in table
 select order_id, o.customer_id,c.customer_id
-
 from orders o
-
 join customers c
-
 on o.customer_id = c.customer_id
 -- for joining table from different database 
 -- use databasename.tablename 
 
 -self join
 use sql_hr;
-
 select e.employee_id,e.first_name,m.first_name as manager
-
 from employees e
- 
 join employees m
-
  on e.reports_to = m.employee_id
-
 
 Joining Multiple Tables
 use sql_store;
-
 select o.order_id,c.first_name,os.name
-
 from orders o
-
 join customers c
-
  on o.customer_id = c.customer_id
-
  join order_statuses os
-  on
- o.status = os.order_status_id
+  on o.status = os.order_status_id
 
 compound join
 using multiple condition to joining tables
@@ -78,7 +62,6 @@ select *
 from orders o, customers c
 where o.customer_id = c.customer_id
 
-
 Outer Join : Displays all the records of
 left or right table
 select c.customer_id, c.first_name
@@ -88,69 +71,66 @@ on c.customer_id = o.customer_id
 
 Outer Join Example between two tables
 select p.product_id, p.name,oi.quantity
-
 from products p
-
 left join order_items oi
-
 on p.product_id = oi.product_id
-
 order by p.product_id
 
 outer join between multiple tables
 select
-
 c.customer_id,
-
 c.first_name,
-
 o.order_id,
-
 sh.name as shipper
-
 from customers c
-
 left join orders o
-
-on c.customer_id = o.customer_id
- -- or Using(customer_id)
+on c.customer_id = o.customer_id -- or Using(customer_id)
 left join shippers sh
-
 on o.shipper_id = sh.shipper_id
-
 order by c.customer_id
 
+Example of using clause
+use sql_invoicing;
+select p.date, c.name,p.amount,pm.name
+from payments p
+join clients c
+using (client_id)
+join payment_methods pm
+ on p.payment_method = pm.payment_method_id
+ 
+
+
+•	Example of Union and how to create a virtual column with string
+use sql_store;
+select customer_id, first_name,points, 'bronze' as type
+ FROM customers
+where points <= 2000
+union
+select customer_id, first_name,points, 'silver' as type
+ FROM customers
+where points between 2000 and 3000
+union
+select customer_id, first_name,points, 'gold' as type
+ FROM customers
+where points > 3000
+result
 
 
 
 
+	
 
+*Inserting a row in a table
+use sql_store;
+insert into customers(first_name,last_name,birth_date,address,city,state)
+values ('john','smith','1990-01-01','address','city','ca')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*Inserting multiple row at one time
+use sql_store;
+insert into products (name, quantity_in_stock,Unit_price)
+values ('Product1',10,1.95),
+            ('Product1',11,1.95),
+            ('Product1',12,1.95)
 
 
 
